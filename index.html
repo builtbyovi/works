@@ -389,10 +389,12 @@
     align-items: center;
   }
 
-  .page-title-symbol {
-    margin-bottom: 20px;  /* 👈 Just enough spacing */
+    .page-title-symbol {
+    display: block;
+    margin: 0 auto 16px auto;  /* Centered + bottom spacing like a title */
     transform: rotate(90deg) scale(0.7);
-    z-index: 2;           /* 👈 Ensure it's above gallery if needed */
+    text-align: center;
+    z-index: 1;
   }
 
   .gallery {
@@ -400,7 +402,7 @@
     gap: 16px;
     max-width: 90vw;
     margin-top: 0;        /* 👈 Remove excess margin if any */
-    padding-top: 10px;    /* 👈 Add gentle space if needed */
+    padding-top: 0;    /* 👈 Add gentle space if needed */
     z-index: 1;
   }
 

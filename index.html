@@ -32,20 +32,21 @@
     }
 
 @media (max-width: 768px) {
-  .page-title-symbol {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: rotate(90deg);
-    margin: 10px auto 20px auto;
-    width: 60px;
-    height: 60px;
-    font-size: 32px;
-    line-height: 60px;
-    text-align: center;
-    display: block;
-  }
+.page-title-symbol {
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: rotate(90deg);
+  margin: 10px auto 20px auto;
+  width: 80px;
+  height: 80px;
+  font-size: 48px;
+  line-height: 80px;
+  text-align: center;
+  display: block;
+  z-index: 1;
 }
+
 
     .contact-label {
       margin-bottom: 6px;
@@ -403,25 +404,29 @@
         height: auto;
       }
 
-     .page-title-symbol {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) rotate(90deg);
-  width: 60px;
-  height: 60px;
-  font-size: 32px;
-  line-height: 60px;
-  text-align: center;
-  z-index: 1000;
-}
+ .page-title-symbol {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: rotate(90deg);
+    margin: 10px auto 20px auto;
+    width: 80px;
+    height: 80px;
+    font-size: 48px;
+    line-height: 80px;
+    text-align: center;
+    display: block;
+    z-index: 1;
+  }
 
       .modal, #imageModal {
         width: 90vw;
         font-size: 14px;
         padding: 20px;
       }
-
+.image-card:first-child {
+  margin-top: 20px;
+}
       .cursor {
         display: none;
       }

@@ -389,18 +389,17 @@
     align-items: center;
   }
 
-    .page-title-symbol {
-    display: block;
-    margin: 0 auto 16px auto;  /* Centered + bottom spacing like a title */
-    transform: rotate(90deg) scale(0.7);
-    text-align: center;
-    z-index: 1;
-  }
+   .page-title-symbol {
+  display: block;
+  margin: 40px auto 24px auto;  /* top & bottom spacing */
+  transform: rotate(90deg) scale(0.7);
+  text-align: center;
+}
 
  .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);  /* 2 fixed columns */
+  gap: 16px;  /* adjust to taste */
   max-width: 90vw;
   margin: 0 auto;
 }
@@ -408,8 +407,9 @@
   }
 
  .gallery-item {
-  width: 100%;      /* auto fit inside column */
+  width: 100%;     /* fill the column */
   height: auto;
+  aspect-ratio: 4/3; /* optional: keeps uniform size for mixed media */
 }
 
   .modal, #imageModal {

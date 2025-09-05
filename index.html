@@ -445,14 +445,13 @@
   }
 
   /* Full-width, single-column gallery with comfortable padding */
- .gallery {
-  display: grid;
-  grid-template-columns: 2fr;
-  gap: 20px;
-  width: 100%;
-  max-width: 100%;
-  padding: 0 12px 12px;
-}
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px 40px;
+  }
 
   /* Make each item fill the width and keep a square ratio */
   .gallery-item {
@@ -462,18 +461,14 @@
   }
 
   /* Fill each tile fully (cover) so images are large — not letterboxed/small */
-  .gallery-item {
-  width: 100%;
-  height: auto;        /* let items expand naturally */
-  aspect-ratio: auto;  /* ✅ remove forced square if present */
-}
-.gallery-item img,
-.gallery-item video {
-  width: 100%;
-  height: auto;        /* scale naturally, no cropping */
-  object-fit: contain; /* ✅ shows full media, not cropped */
-  display: block;
-}
+  .gallery-item img,
+  .gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* fills the tile — switch to 'contain' only if you want full image visible with letterboxing */
+    display: block;
+  }
+
   /* Hide hover mask on touch devices so media is not obscured */
   .mask {
     display: none;

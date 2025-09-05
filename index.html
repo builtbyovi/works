@@ -62,7 +62,7 @@
   mix-blend-mode: normal;
 }
 
- .symbol-triangle {
+.cursor .symbol-triangle {
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -76,7 +76,7 @@
   filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */
 }
 
- .symbol-square {
+.cursor .symbol-square {
   width: 16px;
   height: 16px;
   background-color: cyan;
@@ -99,15 +99,17 @@
 }
 
     .page-title-symbol {
-  position: relative;
-  display: block;
-  width: 24px;
-  height: 40px;
-  margin: 40px auto 24px auto; /* spacing above and below */
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
+      position: relative;
+      transform: rotate(90deg);
+      margin-bottom: 40px;
+      width: 80px;
+      height: 80px;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
 
     .page-title-symbol .symbol-triangle {
       border-left: 20px solid transparent;
@@ -381,62 +383,82 @@
       color: #005fa3;
     }
 
-     body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 90vw;
+      }
 
-.page-title-symbol {
-  display: block;
-  transform: rotate(90deg) scale(0.7);
-  margin: 40px auto 24px auto; /* top spacing & gap from gallery */
-  text-align: center;
-  z-index: 2;                  /* stay on top */
-  position: relative;          /* ensures z-index applies */
+      .gallery-item {
+        width: 90vw;
+        height: auto;
+      }
+
+      .page-title-symbol {
+        margin-bottom: 30px;
+        transform: rotate(90deg) scale(0.7);
+      }
+
+      .modal, #imageModal {
+        width: 90vw;
+        font-size: 14px;
+        padding: 20px;
+      }
+
+      .cursor {
+        display: none;
+      }
+.mobile-contact-header {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  user-select: none;
+  pointer-events: none;
 }
 
- .gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);  /* 2 fixed columns */
-  gap: 16px;  /* adjust to taste */
-  max-width: 90vw;
-  margin: 0 auto;
+.mobile-contact-header .top-title,
+.mobile-contact-header .contact-label,
+.mobile-contact-header .page-title-symbol {
+  pointer-events: auto;
 }
 
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .mobile-contact-header {
+    position: static;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transform: none;
   }
 
- .gallery-item {
-  width: 100%;     /* fill the column */
-  height: auto;
-  aspect-ratio: 4/3; /* optional: keeps uniform size for mixed media */
+  .page-title-symbol {
+    transform: rotate(90deg) scale(1.1);
+    margin-bottom: 15px;
+  }
+
+  .gallery {
+    margin-top: 20px;
+  }
 }
-
-  .modal, #imageModal {
-    width: 90vw;
-    font-size: 14px;
-    padding: 20px;
-  }
-
-  .cursor {
-    display: none;
-  }
-}
+    }
   </style>
 </head>
 <body>
-  <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
 
+  <div class="mobile-contact-header">
+  <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
   <div class="contact-label">Contact</div>
   <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
     <div class="symbol-triangle"></div>
     <div class="symbol-square"></div>
   </button>
-
-  <div class="cursor" id="customCursor">
-    <div class="symbol-triangle"></div>
-    <div class="symbol-square"></div>
-  </div>
+</div>
 
   <div class="gallery" id="gallery"></div>
 

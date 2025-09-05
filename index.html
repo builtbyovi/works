@@ -382,15 +382,7 @@
     .social-links a:hover {
       color: #005fa3;
     }
-.contact-symbol-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 60px;
-  margin-bottom: 40px;
-  z-index: 10;
-  position: relative;
-}
+
     @media (max-width: 768px) {
       .gallery {
         grid-template-columns: 1fr;
@@ -402,51 +394,32 @@
         width: 90vw;
         height: auto;
       }
- .page-title-symbol {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    transform: rotate(90deg) scale(0.8);
-    width: 60px;
-    height: 60px;
-  }
 
-  .page-title-symbol .symbol-triangle {
-    border-left: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-bottom: 24px solid black;
-    top: 0;
-  }
+      .page-title-symbol {
+        margin-bottom: 10px;
+        transform: rotate(90deg) ;
+      }
 
-  .page-title-symbol .symbol-square {
-    width: 28px;
-    height: 28px;
-    top: 24px;
-  }
+      .modal, #imageModal {
+        width: 90vw;
+        font-size: 14px;
+        padding: 20px;
+      }
 
-  .modal, #imageModal {
-    width: 90vw;
-    font-size: 14px;
-    padding: 20px;
-  }
-
-  .cursor {
-    display: none;
-  }
-
-
-    
+      .cursor {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
   <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
 
-<div class="contact-symbol-container">
+  <div class="contact-label">Contact</div>
   <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
     <div class="symbol-triangle"></div>
     <div class="symbol-square"></div>
   </button>
-</div>
 
   <div class="cursor" id="customCursor">
     <div class="symbol-triangle"></div>

@@ -427,6 +427,51 @@
 .mobile-contact-header .page-title-symbol {
   pointer-events: auto;
 }
+      .linktree {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.linktree a {
+  display: block;
+  padding: 14px 20px;
+  background: #fff;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.linktree a:hover {
+  background: #eaeaea;
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  #contactModal {
+    width: 95vw;
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .linktree a {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  #contactModal button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
 
 /* Responsive adjustments for mobile */
 @media (max-width: 768px) {
@@ -463,20 +508,20 @@
   <div class="gallery" id="gallery"></div>
 
   <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal" id="contactModal">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:builtby.ovi@gmail.com">builtby.ovi@gmail.com</a><br/>
 
-    <p>Follow us on:</p>
-    <ul class="social-links">
-      <li><a href="https://www.tiktok.com/@builtbyovi" target="_blank">TikTok</a></li>
-      <li><a href="https://www.youtube.com/@builtbyovi" target="_blank">YouTube</a></li>
-      <li><a href="https://www.instagram.com/builtbyovi/" target="_blank">Instagram</a></li>
-      <li><a href="https://www.pinterest.com/builtbyovi" target="_blank">Pinterest</a></li>
-      <li><a href="https://www.behance.net/builtbyovi" target="_blank">Behance</a></li>
-    </ul>
-    <button onclick="closeModal()">Close</button>
+  <div id="contactModal" class="modal hidden" role="dialog" aria-modal="true">
+  <h2>OD / builtbyovi</h2>
+  <p>Architect / Designer</p>
+  <div class="linktree">
+    <a href="mailto:builtby.ovi@gmail.com">📧 Email</a>
+    <a href="https://tiktok.com/@builtbyovi" target="_blank">🎵 TikTok</a>
+    <a href="https://youtube.com/@builtbyovi" target="_blank">📺 YouTube</a>
+    <a href="https://instagram.com/builtbyovi" target="_blank">📸 Instagram</a>
+    <a href="https://pinterest.com/builtbyovi" target="_blank">📌 Pinterest</a>
+    <a href="https://www.behance.net/builtbyovi" target="_blank">🎨 Behance</a>
   </div>
+  <button onclick="closeModal('contactModal')">Close</button>
+</div>
 
   <div class="modal-overlay" id="imageModalOverlay" style="display:none;"></div>
   <div id="imageModal">

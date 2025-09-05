@@ -62,7 +62,7 @@
   mix-blend-mode: normal;
 }
 
-.cursor .symbol-triangle {
+ .symbol-triangle {
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
@@ -76,7 +76,7 @@
   filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */
 }
 
-.cursor .symbol-square {
+ .symbol-square {
   width: 16px;
   height: 16px;
   background-color: cyan;
@@ -99,17 +99,15 @@
 }
 
     .page-title-symbol {
-      position: relative;
-      transform: rotate(90deg);
-      margin-bottom: 40px;
-      width: 80px;
-      height: 80px;
-      user-select: none;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-    }
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 40px;
+  margin: 40px auto 24px auto; /* spacing above and below */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 
     .page-title-symbol .symbol-triangle {
       border-left: 20px solid transparent;

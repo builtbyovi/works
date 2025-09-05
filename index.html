@@ -389,11 +389,13 @@
     align-items: center;
   }
 
-   .page-title-symbol {
+.page-title-symbol {
   display: block;
-  margin: 40px auto 24px auto;  /* top & bottom spacing */
   transform: rotate(90deg) scale(0.7);
+  margin: 40px auto 24px auto; /* top spacing & gap from gallery */
   text-align: center;
+  z-index: 2;                  /* stay on top */
+  position: relative;          /* ensures z-index applies */
 }
 
  .gallery {

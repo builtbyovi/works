@@ -397,19 +397,20 @@
     z-index: 1;
   }
 
-  .gallery {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    max-width: 90vw;
-    margin-top: 0;        /* 👈 Remove excess margin if any */
-    padding-top: 0;    /* 👈 Add gentle space if needed */
-    z-index: 1;
+ .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
   }
 
-  .gallery-item {
-    width: 90vw;
-    height: auto;
-  }
+ .gallery-item {
+  width: 100%;      /* auto fit inside column */
+  height: auto;
+}
 
   .modal, #imageModal {
     width: 90vw;

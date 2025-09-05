@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>OD</title>
   <style>
     @font-face {
@@ -383,12 +383,17 @@
       color: #005fa3;
     }
 
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        max-width: 90vw;
-      }
+   @media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* show 2 columns instead of 1 */
+    gap: 16px;
+    max-width: 95vw;
+  }
+
+  .gallery-item {
+    width: 100%;
+    height: auto;
+  }
 
       .gallery-item {
         width: 90vw;
@@ -396,9 +401,12 @@
       }
 
       .page-title-symbol {
-        margin-bottom: 30px;
-        transform: rotate(90deg) scale(0.7);
-      }
+  margin-bottom: 30px;
+  transform: rotate(90deg) scale(0.7);
+  position: relative;
+  z-index: 999; /* ensures it's above other elements */
+  display: block;
+}
 
       .modal, #imageModal {
         width: 90vw;

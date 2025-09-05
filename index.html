@@ -383,145 +383,90 @@
       color: #005fa3;
     }
 
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        max-width: 90vw;
-      }
-
-      .gallery-item {
-        width: 90vw;
-        height: auto;
-      }
-
-      .page-title-symbol {
-        margin-bottom: 30px;
-        transform: rotate(90deg) scale(0.7);
-      }
-
-      .modal, #imageModal {
-        width: 90vw;
-        font-size: 14px;
-        padding: 20px;
-      }
-
-      .cursor {
-        display: none;
-      }
-.mobile-contact-header {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1000;
-  user-select: none;
-  pointer-events: none;
-}
-
-.mobile-contact-header .top-title,
-.mobile-contact-header .contact-label,
-.mobile-contact-header .page-title-symbol {
-  pointer-events: auto;
-}
-      .linktree {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.linktree a {
-  display: block;
-  padding: 14px 20px;
-  background: #fff;
-  color: #000;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.linktree a:hover {
-  background: #eaeaea;
-  transform: scale(1.02);
-}
-
-@media (max-width: 768px) {
-  #contactModal {
-    width: 95vw;
-    padding: 20px;
-    font-size: 16px;
-    border-radius: 10px;
+   @media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 90vw;
   }
 
-  .linktree a {
-    font-size: 15px;
-    padding: 12px;
+  .gallery-item {
+    width: 90vw;
+    height: auto;
   }
 
-  #contactModal button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-}
-
-/* Responsive adjustments for mobile */
-@media (max-width: 768px) {
-  .mobile-contact-header {
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    transform: none;
+  .contact-label {
+    text-align: center;   /* ✅ centers text above symbol */
+    display: block;
+    margin-bottom: 10px;
   }
 
   .page-title-symbol {
-    transform: rotate(90deg) scale(1.1);
-    margin-bottom: 15px;
+    display: block;
+    margin: 20px auto 60px auto;   /* ✅ last value adds a large gap below */
+    transform: rotate(90deg);
+    width: 60px;
+    height: 60px;
   }
 
-  .gallery {
-    margin-top: 20px;
+  .page-title-symbol .symbol-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25.98px solid black; /* equilateral */
+  }
+
+  .page-title-symbol .symbol-square {
+    width: 30px;
+    height: 30px;
+    top: 25.98px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .modal, #imageModal {
+    width: 90vw;
+    font-size: 14px;
+    padding: 20px;
+  }
+
+  .cursor {
+    display: none;
   }
 }
-    }
+
   </style>
 </head>
 <body>
-
-  <div class="mobile-contact-header">
   <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
+
   <div class="contact-label">Contact</div>
   <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
     <div class="symbol-triangle"></div>
     <div class="symbol-square"></div>
   </button>
-</div>
+
+  <div class="cursor" id="customCursor">
+    <div class="symbol-triangle"></div>
+    <div class="symbol-square"></div>
+  </div>
 
   <div class="gallery" id="gallery"></div>
 
   <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal" id="contactModal">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:builtby.ovi@gmail.com">builtby.ovi@gmail.com</a><br/>
 
-  <div id="contactModal" class="modal hidden" role="dialog" aria-modal="true">
-  <h2>OD / builtbyovi</h2>
-  <p>Architect / Designer</p>
-  <div class="linktree">
-    <a href="mailto:builtby.ovi@gmail.com">📧 Email</a>
-    <a href="https://tiktok.com/@builtbyovi" target="_blank">🎵 TikTok</a>
-    <a href="https://youtube.com/@builtbyovi" target="_blank">📺 YouTube</a>
-    <a href="https://instagram.com/builtbyovi" target="_blank">📸 Instagram</a>
-    <a href="https://pinterest.com/builtbyovi" target="_blank">📌 Pinterest</a>
-    <a href="https://www.behance.net/builtbyovi" target="_blank">🎨 Behance</a>
+    <p>Follow us on:</p>
+    <ul class="social-links">
+      <li><a href="https://www.tiktok.com/@builtbyovi" target="_blank">TikTok</a></li>
+      <li><a href="https://www.youtube.com/@builtbyovi" target="_blank">YouTube</a></li>
+      <li><a href="https://www.instagram.com/builtbyovi/" target="_blank">Instagram</a></li>
+      <li><a href="https://www.pinterest.com/builtbyovi" target="_blank">Pinterest</a></li>
+      <li><a href="https://www.behance.net/builtbyovi" target="_blank">Behance</a></li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
   </div>
-  <button onclick="closeModal('contactModal')">Close</button>
-</div>
 
   <div class="modal-overlay" id="imageModalOverlay" style="display:none;"></div>
   <div id="imageModal">

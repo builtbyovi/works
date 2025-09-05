@@ -400,12 +400,17 @@
         height: auto;
       }
 
-      .page-title-symbol {
-  margin-bottom: 30px;
-  transform: rotate(90deg) scale(0.7);
-  position: relative;
-  z-index: 999; /* ensures it's above other elements */
-  display: block;
+     .page-title-symbol {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  width: 60px;
+  height: 60px;
+  font-size: 32px;
+  line-height: 60px;
+  text-align: center;
+  z-index: 1000;
 }
 
       .modal, #imageModal {

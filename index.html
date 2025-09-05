@@ -31,18 +31,21 @@
       position: relative;
     }
 
-    .top-title {
-      position: absolute;
-      top: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      color: #888;
-      letter-spacing: 0.5px;
-      user-select: none;
-      z-index: 1000;
-      pointer-events: none;
-    }
+@media (max-width: 768px) {
+  .page-title-symbol {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: rotate(90deg);
+    margin: 10px auto 20px auto;
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+    line-height: 60px;
+    text-align: center;
+    display: block;
+  }
+}
 
     .contact-label {
       margin-bottom: 6px;

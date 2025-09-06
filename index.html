@@ -49,12 +49,14 @@
     }
 
     .contact-label {
-      font-family: 'Segoe UI', sans-serif;
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: #444;
-      user-select: none;
-      font-weight: 300;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #444;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
     }
 
 .cursor {
@@ -66,7 +68,13 @@
   z-index: 10000;
   mix-blend-mode: normal;
 }
-
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* space between symbol and contact text */
+  margin-bottom: 24px;
+}
 .cursor .symbol-triangle {
   width: 0;
   height: 0;

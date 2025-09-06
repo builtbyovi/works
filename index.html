@@ -437,18 +437,21 @@
 
   /* One column gallery, full width with padding */
 .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 fixed columns */
-    gap: 16px;
-    width: 100%;
-    max-width: 100vw;
-    padding: 0 16px 40px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: fit-content;             /* shrink to fit content */
+  margin: 0 auto 40px auto;       /* center the gallery horizontally */
+  padding: 0 0 40px 0;
+  justify-content: center;        /* center grid items */
+}
 
-  /* Prevent “cropped” look on mobile */
-  .gallery-item {
-    width: 100%;
-    height: auto;
-  }
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* center content horizontally */
+  justify-content: center;        /* center content vertically if needed */
+}
   .gallery img,
   .gallery video {
     width: 100%;

@@ -442,7 +442,22 @@
   }
      .symbol-text {
     top: calc(25.98px + 30px + 2px); /* triangle height + square height + small gap */
-    font-size: 11px;
+
+       position: absolute;
+  top: 57%;
+  left: 75%;
+  transform: translateX(-50%) rotate(-90deg); /* counteract symbol's 90deg */
+  transform-origin: top center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: #444;
+  font-weight: 300;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.3px;
+  margin-top: 8px; /* space between symbol and text */
+  text-align: center;
+
   }
   .page-title-symbol .symbol-triangle {
     border-left: 15px solid transparent;

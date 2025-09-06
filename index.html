@@ -440,11 +440,14 @@
     width: 60px;
     height: 60px;
   }
-     .symbol-text {
-    top: calc(25.98px + 30px + 2px); /* triangle height + square height + small gap */
-    font-size: 11px;
-    transform: rotate(0deg);
-  }
+    .symbol-text {
+  top: calc(25.98px + 30px + 8px); /* add some space below square */
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg); /* Align with symbol rotation */
+  transform-origin: top center;
+  font-size: 11px;
+  text-align: center;
+}
   .page-title-symbol .symbol-triangle {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;

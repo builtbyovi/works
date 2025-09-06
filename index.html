@@ -2,11 +2,474 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>OD</title>
-  <!-- Your CSS stays as-is (already included in your message) -->
+  <style>
+    @font-face {
+      font-family: 'Swis721 LtCn BT';
+      src: url('./fonts/Swis721LtCnBT.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-  <style> @font-face { font-family: 'Swis721 LtCn BT'; src: url('./fonts/Swis721LtCnBT.woff2') format('woff2'); font-weight: normal; font-style: normal; font-display: swap; } * { margin: 0; padding: 0; box-sizing: border-box; } body { height: 100vh; background-color: white; font-family: 'Swis721 LtCn BT', 'Helvetica Neue', Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; flex-direction: column; cursor: none; position: relative; } .top-title { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 18px; color: #888; letter-spacing: 0.5px; user-select: none; z-index: 1000; pointer-events: none; } .contact-label { margin-bottom: 6px; font-size: 14px; color: #444; user-select: none; font-weight: 500; } .cursor { position: fixed; width: 30px; height: 30px; pointer-events: none; transform: translate(-50%, -50%); z-index: 10000; mix-blend-mode: normal; } .cursor .symbol-triangle { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 13.86px solid cyan; position: absolute; top: 0; left: 50%; transform: translateX(-50%); transition: border-bottom-color 0.3s ease, filter 0.3s ease; filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */ } .cursor .symbol-square { width: 16px; height: 16px; background-color: cyan; position: absolute; top: 13.86px; left: 50%; transform: translateX(-50%); transition: background-color 0.3s ease, filter 0.3s ease; filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */ } .cursor.hovering .symbol-triangle { border-bottom-color: red; filter: drop-shadow(0 0 6px red); /* Glow on edges */ } .cursor.hovering .symbol-square { background-color: red; filter: drop-shadow(0 0 6px red); /* Glow on edges */ } .page-title-symbol { position: relative; transform: rotate(90deg); margin-bottom: 40px; width: 80px; height: 80px; user-select: none; background: none; border: none; padding: 0; cursor: pointer; } .page-title-symbol .symbol-triangle { border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 34.64px solid black; position: absolute; top: 0; left: 50%; transform: translateX(-50%); transition: border-bottom-color 0.3s; } .page-title-symbol .symbol-square { width: 40px; height: 40px; background-color: black; position: absolute; top: 34.64px; left: 50%; transform: translateX(-50%); transition: background-color 0.3s; } .page-title-symbol:hover .symbol-triangle { border-bottom-color: red; } .page-title-symbol:hover .symbol-square { background-color: red; } .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; justify-items: center; align-items: center; max-width: 80vw; } .gallery-item { position: relative; width: 200px; height: 200px; overflow: hidden; } .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease, transform 0.6s ease; transform: scale(1); display: block; } .gallery-item video { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease, transform 0.6s ease; display: block; } .mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); display: flex; justify-content: center; align-items: center; transition: transform 0.6s ease, opacity 0.6s ease; z-index: 2; } .mask .symbol .symbol-triangle { border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid black; position: absolute; top: 0; left: 50%; transform: translateX(-50%); } .mask .symbol .symbol-square { width: 20px; height: 20px; background-color: black; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); } .gallery-item:hover .mask { transform: scaleY(0); opacity: 0; } .gallery-item:hover img { transform: scale(1.05); } .gallery-item.last-centered { grid-column: 2 / 3; justify-self: center; } .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 999; } .modal-overlay.active { display: block; } .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: #fafafa; border: 2px solid black; padding: 25px 30px; z-index: 1000; text-align: center; opacity: 0; pointer-events: none; border-radius: 8px; font-size: 16px; color: #222; font-weight: 400; line-height: 1.5; transition: transform 0.4s ease, opacity 0.4s ease; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); user-select: none; } .modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; } #contactModal h2 { font-weight: 700; font-size: 24px; margin-bottom: 20px; color: #000; } #contactModal a { color: #0077cc; text-decoration: none; } #contactModal a:hover { color: #005fa3; text-decoration: underline; } #contactModal button { margin-top: 20px; padding: 8px 22px; font-weight: 600; border-radius: 5px; border: 1.5px solid #000; background-color: transparent; font-size: 15px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; } #contactModal button:hover { background-color: #000; color: #fff; border-color: #000; } #imageModal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); background: #fff; border: 2px solid black; padding: 20px; z-index: 1001; text-align: center; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s ease; max-width: 90vw; max-height: 90vh; overflow: auto; } #imageModal.show { display: block; opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); } #imageModal { max-width: 100vw; max-height: 100vh; padding: 0; } #imageModal img { max-width: 100%; max-height: 100vh; } #imageModal .description { font-size: 14px; color: #333; margin-bottom: 10px; } #imageModal button { margin: 5px; padding: 6px 16px; font-weight: 600; border: 1.5px solid black; background: transparent; border-radius: 5px; cursor: pointer; transition: all 0.3s; } #imageModal button:hover { background: black; color: white; } .social-links { list-style: none; padding-left: 0; margin-top: 10px; margin-bottom: 15px; } .social-links li { margin: 5px 0; } .social-links a { color: #0077cc; text-decoration: none; transition: color 0.3s; } .social-links a:hover { color: #005fa3; } @media (max-width: 768px) { .gallery { grid-template-columns: 1fr; gap: 16px; max-width: 90vw; } .gallery-item { width: 90vw; height: auto; } .contact-label { text-align: center; /* ✅ centers text above symbol */ display: block; margin-bottom: 10px; } .page-title-symbol { display: block; margin: 20px auto 60px auto; /* ✅ last value adds a large gap below */ transform: rotate(90deg); width: 60px; height: 60px; } .page-title-symbol .symbol-triangle { border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 25.98px solid black; /* equilateral */ } .page-title-symbol .symbol-square { width: 30px; height: 30px; top: 25.98px; left: 50%; transform: translateX(-50%); } .modal, #imageModal { width: 90vw; font-size: 14px; padding: 20px; } .cursor { display: none; } }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: white;
+      font-family: 'Swis721 LtCn BT', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: none;
+      position: relative;
+    }
+
+    .top-title {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      color: #888;
+      letter-spacing: 0.5px;
+      user-select: none;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .contact-label {
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #444;
+      user-select: none;
+      font-weight: 500;
+    }
+
+.cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  mix-blend-mode: normal;
+}
+
+.cursor .symbol-triangle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 13.86px solid cyan;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: border-bottom-color 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */
+}
+
+.cursor .symbol-square {
+  width: 16px;
+  height: 16px;
+  background-color: cyan;
+  position: absolute;
+  top: 13.86px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: background-color 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 0px cyan); /* Default: no visible glow */
+}
+
+.cursor.hovering .symbol-triangle {
+  border-bottom-color: red;
+  filter: drop-shadow(0 0 6px red); /* Glow on edges */
+}
+
+.cursor.hovering .symbol-square {
+  background-color: red;
+  filter: drop-shadow(0 0 6px red); /* Glow on edges */
+}
+
+    .page-title-symbol {
+      position: relative;
+      transform: rotate(90deg);
+      margin-bottom: 40px;
+      width: 80px;
+      height: 80px;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .page-title-symbol .symbol-triangle {
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 34.64px solid black;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: border-bottom-color 0.3s;
+    }
+
+    .page-title-symbol .symbol-square {
+      width: 40px;
+      height: 40px;
+      background-color: black;
+      position: absolute;
+      top: 34.64px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: background-color 0.3s;
+    }
+
+    .page-title-symbol:hover .symbol-triangle {
+      border-bottom-color: red;
+    }
+
+    .page-title-symbol:hover .symbol-square {
+      background-color: red;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+      align-items: center;
+      max-width: 80vw;
+    }
+
+    .gallery-item {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: scale(1);
+      display: block;
+    }
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  display: block;
+}
+
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      z-index: 2;
+    }
+
+    .mask .symbol .symbol-triangle {
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid black;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .mask .symbol .symbol-square {
+      width: 20px;
+      height: 20px;
+      background-color: black;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gallery-item:hover .mask {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item.last-centered {
+      grid-column: 2 / 3;
+      justify-self: center;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+    }
+
+    .modal-overlay.active {
+      display: block;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: #fafafa;
+      border: 2px solid black;
+      padding: 25px 30px;
+      z-index: 1000;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #222;
+      font-weight: 400;
+      line-height: 1.5;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      max-width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      user-select: none;
+    }
+
+    .modal.show {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    #contactModal h2 {
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    #contactModal a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    #contactModal a:hover {
+      color: #005fa3;
+      text-decoration: underline;
+    }
+
+    #contactModal button {
+      margin-top: 20px;
+      padding: 8px 22px;
+      font-weight: 600;
+      border-radius: 5px;
+      border: 1.5px solid #000;
+      background-color: transparent;
+      font-size: 15px;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    #contactModal button:hover {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    #imageModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background: #fff;
+      border: 2px solid black;
+      padding: 20px;
+      z-index: 1001;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    #imageModal.show {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    #imageModal {
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: 0;
+}
+#imageModal img {
+  max-width: 100%;
+  max-height: 100vh;
+}
+
+    #imageModal .description {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    #imageModal button {
+      margin: 5px;
+      padding: 6px 16px;
+      font-weight: 600;
+      border: 1.5px solid black;
+      background: transparent;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #imageModal button:hover {
+      background: black;
+      color: white;
+    }
+
+    .social-links {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .social-links li {
+      margin: 5px 0;
+    }
+
+    .social-links a {
+      color: #0077cc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #005fa3;
+    }
+
+   @media (max-width: 768px) {
+  /* Layout: stop vertical centering & allow full-height scrolling */
+  body {
+    min-height: 100dvh;   /* fixes mobile 100vh issues */
+    height: auto;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 56px;    /* so the top title never overlaps content */
+    cursor: auto;
+  }
+
+  /* Keep the small title pinned at the top */
+  .top-title {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    z-index: 1000;
+  }
+
+  /* Center the "Contact" label */
+  .contact-label {
+    text-align: center;
+    display: block;
+    margin: 8px 0 10px;
+  }
+
+  /* Center + size the contact symbol and add a big gap below it */
+  .page-title-symbol {
+    display: block;
+    margin: 12px auto 60px auto;  /* large gap before first image row */
+    transform: rotate(90deg);      /* removed scale that hid it */
+    width: 60px;
+    height: 60px;
+  }
+  .page-title-symbol .symbol-triangle {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25.98px solid black; /* equilateral for a 30px side */
+  }
+  .page-title-symbol .symbol-square {
+    width: 30px;
+    height: 30px;
+    top: 25.98px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* One column gallery, full width with padding */
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 16px 40px;
+  }
+
+  /* Prevent “cropped” look on mobile */
+  .gallery-item {
+    width: 100%;
+    height: auto;
+  }
+  .gallery-item img,
+  .gallery-item video {
+    width: 100%;
+    height: auto;        /* let media keep its natural height */
+    object-fit: contain; /* show full media instead of cropping */
+    display: block;
+  }
+
+  /* Disable hover-only mask on touch devices */
+  .mask {
+    display: none;
+  }
+
+  /* Modals and cursor */
+  .modal, #imageModal {
+    width: 100vw;
+    max-width: 100vw;
+    font-size: 14px;
+    padding: 20px;
+  }
+  .cursor {
+    display: none;
+  }
+}
   </style>
 </head>
 <body>
@@ -49,164 +512,172 @@
       <button id="prevBtn">←</button>
       <button id="nextBtn">→</button>
     </div>
-    <button class="close-btn" id="closeImageModalBtn">Close</button>
+    <button class="close-btn">Close</button>
   </div>
 
   <script>
-    const cursor = document.getElementById("customCursor");
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    });
-    document.addEventListener("mouseover", (e) => {
-      const tag = e.target.tagName.toLowerCase();
-      if (["a", "button", "img", "video"].includes(tag)) {
-        cursor.classList.add("hovering");
-      }
-    });
-    document.addEventListener("mouseout", (e) => {
-      const tag = e.target.tagName.toLowerCase();
-      if (["a", "button", "img", "video"].includes(tag)) {
-        cursor.classList.remove("hovering");
-      }
-    });
+   const cursor = document.getElementById("customCursor");
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  });
+  document.addEventListener("mouseover", (e) => {
+    const tag = e.target.tagName.toLowerCase();
+    if (tag === "a" || tag === "button" || tag === "img" || tag === "video") {
+      cursor.classList.add("hovering");
+    }
+  });
+  document.addEventListener("mouseout", (e) => {
+    const tag = e.target.tagName.toLowerCase();
+    if (tag === "a" || tag === "button" || tag === "img" || tag === "video") {
+      cursor.classList.remove("hovering");
+    }
+  });
 
-    const titleSymbol = document.getElementById("titleSymbol");
-    const contactModal = document.getElementById("contactModal");
-    const modalOverlay = document.getElementById("modalOverlay");
+  const titleSymbol = document.getElementById("titleSymbol");
+  const contactModal = document.getElementById("contactModal");
+  const modalOverlay = document.getElementById("modalOverlay");
 
-    function openModal() {
-      contactModal.classList.add("show");
-      modalOverlay.classList.add("active");
-      document.body.style.overflow = "hidden";
+  function openModal() {
+    contactModal.classList.add("show");
+    modalOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    contactModal.classList.remove("show");
+    modalOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  titleSymbol.addEventListener("click", openModal);
+  modalOverlay.addEventListener("click", closeModal);
+
+  const mediaItems = [
+    { type: "video", src: "1.mp4", desc: "House NO.30-Building a hidden room/Drop down animation featuring stacked spaces" },
+    { type: "image", src: "1.jpg", desc: "House NO.01-Buildind an introverted house/Image of a introverted room" },
+    { type: "video", src: "2.mp4", desc: "House NO.6-Building underground with an inner courtyard featuring concrete pillars/Looped animation of pure geometric form" },
+    { type: "image", src: "2.jpg", desc: "House NO.31-Building a cave featuring layered geometry/Image of the stacked wall structure" },
+    { type: "video", src: "3.mp4", desc: "House NO.02-Building a roof with a pool on top/Looped animation of geometric upside down roof." },
+    { type: "image", src: "3.jpg", desc: "House NO.30-Building a hidden room/Image from ground-floor level" },
+    { type: "video", src: "4.mp4", desc: "Structure NO.07-Building stacked floors-upside down.Conceptual glitch-driven narrative." },
+    { type: "image", src: "4.jpg", desc: "House NO.05-Building free form space/Image of a covering structure bending upside." },
+    { type: "video", src: "5.mp4", desc: "Structure NO.22-Building the space between/Form-reactive visual based on bending and aligning structures." },
+    { type: "image", src: "5.jpg", desc: "House NO.05-Building free form space/Image of free-form interior rooms." }
+  ];
+
+  const shuffledMedia = mediaItems.sort(() => Math.random() - 0.5);
+  const gallery = document.getElementById("gallery");
+  let currentMediaIndex = 0;
+
+  shuffledMedia.forEach(({ type, src, desc }, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    if ((i === shuffledMedia.length - 1) && shuffledMedia.length % 3 !== 0) {
+      item.classList.add('last-centered');
     }
 
-    function closeModal() {
-      contactModal.classList.remove("show");
-      modalOverlay.classList.remove("active");
-      document.body.style.overflow = "";
-    }
+    const content = type === "video"
+      ? `<video src="${src}" tabindex="0" muted autoplay loop playsinline></video>`
+      : `<img src="${src}" alt="Gallery image ${i + 1}" tabindex="0" loading="lazy" />`;
 
-    titleSymbol.addEventListener("click", openModal);
-    modalOverlay.addEventListener("click", closeModal);
-
-    const mediaItems = [
-      { type: "video", src: "1.mp4", desc: "House NO.30-Building a hidden room/Drop down animation featuring stacked spaces" },
-      { type: "image", src: "1.jpg", desc: "House NO.01-Buildind an introverted house/Image of a introverted room" },
-      { type: "video", src: "2.mp4", desc: "House NO.6-Building underground with an inner courtyard featuring concrete pillars/Looped animation of pure geometric form" },
-      { type: "image", src: "2.jpg", desc: "House NO.31-Building a cave featuring layered geometry/Image of the stacked wall structure" },
-      { type: "video", src: "3.mp4", desc: "House NO.02-Building a roof with a pool on top/Looped animation of geometric upside down roof." },
-      { type: "image", src: "3.jpg", desc: "House NO.30-Building a hidden room/Image from ground-floor level" },
-      { type: "video", src: "4.mp4", desc: "Structure NO.07-Building stacked floors-upside down.Conceptual glitch-driven narrative." },
-      { type: "image", src: "4.jpg", desc: "House NO.05-Building free form space/Image of a covering structure bending upside." },
-      { type: "video", src: "5.mp4", desc: "Structure NO.22-Building the space between/Form-reactive visual based on bending and aligning structures." },
-      { type: "image", src: "5.jpg", desc: "House NO.05-Building free form space/Image of free-form interior rooms." }
-    ];
-
-    const shuffledMedia = mediaItems.sort(() => Math.random() - 0.5);
-    const gallery = document.getElementById("gallery");
-    let currentMediaIndex = 0;
-
-    shuffledMedia.forEach(({ type, src, desc }, i) => {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      if ((i === shuffledMedia.length - 1) && shuffledMedia.length % 3 !== 0) {
-        item.classList.add('last-centered');
-      }
-
-      const content = type === "video"
-        ? `<video src="${src}" muted autoplay loop playsinline></video>`
-        : `<img src="${src}" alt="Gallery image ${i + 1}" tabindex="0" loading="lazy" />`;
-
-      item.innerHTML = `
-        ${content}
-        <div class="mask">
-          <div class="symbol">
-            <div class="symbol-triangle"></div>
-            <div class="symbol-square"></div>
-          </div>
+    item.innerHTML = `
+      ${content}
+      <div class="mask">
+        <div class="symbol">
+          <div class="symbol-triangle"></div>
+          <div class="symbol-square"></div>
         </div>
-      `;
+      </div>
+    `;
 
-      const mediaElement = item.querySelector(type === "video" ? 'video' : 'img');
+    const mediaElement = item.querySelector(type === "video" ? 'video' : 'img');
 
-      mediaElement.addEventListener('click', () => openMediaModal(type, src, desc, i));
-      mediaElement.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openMediaModal(type, src, desc, i);
-        }
-      });
-
-      gallery.appendChild(item);
+    mediaElement.addEventListener('click', () => openMediaModal(type, src, desc, i));
+    mediaElement.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMediaModal(type, src, desc, i);
+      }
     });
 
-    const imageModal = document.getElementById("imageModal");
-    const imageModalOverlay = document.getElementById("imageModalOverlay");
-    const zoomedImage = document.getElementById("zoomedImage");
-    const imageModalDesc = document.getElementById("imageModalDesc");
+    gallery.appendChild(item);
+  });
 
-    let currentType = "image";
+  const imageModal = document.getElementById("imageModal");
+  const imageModalOverlay = document.getElementById("imageModalOverlay");
+  const zoomedImage = document.getElementById("zoomedImage");
+  const imageModalDesc = document.getElementById("imageModalDesc");
 
-    function openMediaModal(type, src, desc, index) {
-      currentMediaIndex = index;
-      currentType = type;
+  let currentType = "image";
 
-      if (type === "image") {
-        zoomedImage.src = src;
-        zoomedImage.style.display = "block";
-        const oldVideo = document.getElementById("zoomedVideo");
-        if (oldVideo) oldVideo.remove();
-      } else {
-        zoomedImage.src = "";
-        zoomedImage.style.display = "none";
-        const oldVideo = document.getElementById("zoomedVideo");
-        if (oldVideo) oldVideo.remove();
+  function openMediaModal(type, src, desc, index) {
+    currentMediaIndex = index;
+    currentType = type;
 
-        const video = document.createElement("video");
-        video.id = "zoomedVideo";
-        video.src = src;
-        video.controls = true;
-        video.autoplay = true;
-        video.loop = true;
-        video.style.maxWidth = "100%";
-        video.style.maxHeight = "90vh";
-        imageModal.insertBefore(video, imageModalDesc);
+    if (type === "image") {
+      zoomedImage.src = src;
+      zoomedImage.style.display = "block";
+      if (document.getElementById("zoomedVideo")) {
+        document.getElementById("zoomedVideo").remove();
       }
-
-      imageModalDesc.textContent = desc;
-      imageModal.classList.add("show");
-      imageModalOverlay.style.display = "block";
-    }
-
-    function closeImageModal() {
-      imageModal.classList.remove("show");
-      imageModalOverlay.style.display = "none";
+    } else {
       zoomedImage.src = "";
-      imageModalDesc.textContent = "";
-      const video = document.getElementById("zoomedVideo");
-      if (video) video.remove();
+      zoomedImage.style.display = "none";
+      const video = document.createElement("video");
+      video.id = "zoomedVideo";
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.style.maxWidth = "100%";
+      video.style.maxHeight = "90vh";
+      imageModal.insertBefore(video, imageModalDesc);
     }
 
-    function showMediaAtIndex(index) {
-      const { type, src, desc } = shuffledMedia[index];
-      openMediaModal(type, src, desc, index);
-    }
+    imageModalDesc.textContent = desc;
+    imageModal.classList.add("show");
+    imageModalOverlay.style.display = "block";
+  }
 
-    function nextMedia() {
-      currentMediaIndex = (currentMediaIndex + 1) % shuffledMedia.length;
-      showMediaAtIndex(currentMediaIndex);
-    }
+  function closeImageModal() {
+    imageModal.classList.remove("show");
+    imageModalOverlay.style.display = "none";
+    zoomedImage.src = "";
+    imageModalDesc.textContent = "";
+    const video = document.getElementById("zoomedVideo");
+    if (video) video.remove();
+  }
 
-    function prevMedia() {
-      currentMediaIndex = (currentMediaIndex - 1 + shuffledMedia.length) % shuffledMedia.length;
-      showMediaAtIndex(currentMediaIndex);
-    }
+  function showMediaAtIndex(index) {
+    const { type, src, desc } = shuffledMedia[index];
+    openMediaModal(type, src, desc, index);
+  }
 
-    document.getElementById("nextBtn").addEventListener("click", nextMedia);
-    document.getElementById("prevBtn").addEventListener("click", prevMedia);
-    document.getElementById("closeImageModalBtn").addEventListener("click", closeImageModal);
-    imageModalOverlay.addEventListener("click", closeImageModal);
-  </script>
+  function nextMedia() {
+    currentMediaIndex = (currentMediaIndex + 1) % shuffledMedia.length;
+    showMediaAtIndex(currentMediaIndex);
+  }
+
+  function prevMedia() {
+    currentMediaIndex = (currentMediaIndex - 1 + shuffledMedia.length) % shuffledMedia.length;
+    showMediaAtIndex(currentMediaIndex);
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", nextMedia);
+  document.getElementById("prevBtn").addEventListener("click", prevMedia);
+  imageModal.querySelector(".close-btn").addEventListener("click", closeImageModal);
+  imageModalOverlay.addEventListener("click", closeImageModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+      closeImageModal();
+    } else if (imageModal.classList.contains("show")) {
+      if (e.key === "ArrowRight") nextMedia();
+      else if (e.key === "ArrowLeft") prevMedia();
+    }
+  });
+</script>
 </body>
 </html>

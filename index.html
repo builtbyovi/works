@@ -117,9 +117,10 @@
     }
 .symbol-text {
   position: absolute;
-  top: 80px; /* Try 80–85px to fine-tune */
+  top: calc(34.64px + 40px + 4px); /* below the square */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(90deg); /* rotate just this */
+  transform-origin: top left;
   font-family: 'Segoe UI', sans-serif;
   font-size: 12px;
   color: #444;
@@ -127,6 +128,7 @@
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.3px;
+
 }
     .page-title-symbol .symbol-triangle {
       border-left: 20px solid transparent;

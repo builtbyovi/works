@@ -115,7 +115,19 @@
       padding: 0;
       cursor: pointer;
     }
-
+.symbol-text {
+  position: absolute;
+  top: calc(34.64px + 40px + 4px); /* triangle height + square height + small gap */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: #444;
+  font-weight: 300;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.3px;
+}
     .page-title-symbol .symbol-triangle {
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
@@ -442,6 +454,10 @@
     width: 60px;
     height: 60px;
   }
+     .symbol-text {
+    top: calc(25.98px + 30px + 2px); /* triangle height + square height + small gap */
+    font-size: 11px;
+  }
   .page-title-symbol .symbol-triangle {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
@@ -502,10 +518,11 @@
   <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
 
   <div class="contact-label">contact</div>
-  <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
-    <div class="symbol-triangle"></div>
-    <div class="symbol-square"></div>
-  </button>
+ <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
+  <div class="symbol-triangle"></div>
+  <div class="symbol-square"></div>
+  <div class="symbol-text">contact</div> <!-- ✅ added this -->
+</button>
 
   <div class="cursor" id="customCursor">
     <div class="symbol-triangle"></div>

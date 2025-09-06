@@ -433,6 +433,12 @@
     text-align: center;
     margin-bottom: 4px;
   }
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px; /* Adjust as needed for spacing below */
+}
 
   /* Center + size the contact symbol and add a big gap below it */
   .page-title-symbol {
@@ -503,11 +509,13 @@
 <body>
   <div class="top-title">builtbyovi / Ovidiu Diaconescu</div>
 
+ <div class="contact-wrapper">
   <div class="contact-label">contact</div>
   <button class="page-title-symbol" id="titleSymbol" title="Contact Info" aria-label="Open contact information">
     <div class="symbol-triangle"></div>
     <div class="symbol-square"></div>
   </button>
+</div>
 
   <div class="cursor" id="customCursor">
     <div class="symbol-triangle"></div>

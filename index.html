@@ -625,7 +625,58 @@
   const imageModalDesc = document.getElementById("imageModalDesc");
 
   let currentType = "image";
+  function openMediaModal(type, src, desc, index) {
+    currentMediaIndex = index;
+    currentType = type;
 
+    if (type === "image") {
+      zoomedImage.src = src;
+      zoomedImage.style.display = "block";
+    } else {
+      zoomedImage.src = "";
+      zoomedImage.style.display = "none";
+    }
+
+    imageModalDesc.textContent = desc;
+    imageModal.classList.add("show");
+    imageModalOverlay.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeImageModal() {
+    imageModal.classList.remove("show");
+    imageModalOverlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  function showMedia(index) {
+    const media = shuffledMedia[index];
+    if (!media) return;
+
+    currentMediaIndex = index;
+    if (media.type === "image") {
+      zoomedImage.src = media.src;
+      zoomedImage.style.display = "block";
+    } else {
+      zoomedImage.src = "";
+      zoomedImage.style.display = "none";
+    }
+
+    imageModalDesc.textContent = media.desc;
+  }
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    const prevIndex = (currentMediaIndex - 1 + shuffledMedia.length) % shuffledMedia.length;
+    showMedia(prevIndex);
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    const nextIndex = (currentMediaIndex + 1) % shuffledMedia.length;
+    showMedia(nextIndex);
+  });
+
+  document.querySelector("#imageModal .close-btn").addEventListener("click", closeImageModal);
+  imageModalOverlay.addEventListener("click", closeImageModal);
   function openMediaModal(type, src, desc, index) {
     currentMediaIndex = index;
     currentType = type;

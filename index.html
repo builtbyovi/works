@@ -440,13 +440,11 @@
     width: 60px;
     height: 60px;
   }
-     .symbol-text {
-    top: calc(25.98px + 30px + 2px); /* triangle height + square height + small gap */
-
-       position: absolute;
-  top: 5%;
-  left: 75%;
-  transform: translateX(-50%) rotate(-90deg); /* counteract symbol's 90deg */
+  .symbol-text {
+  position: absolute;
+  top: calc(25.98px + 30px + 8px); /* triangle height + square height + gap */
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg);
   transform-origin: top center;
   font-family: 'Segoe UI', sans-serif;
   font-size: 10px;
@@ -455,10 +453,8 @@
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.3px;
-  margin-top: 8px; /* space between symbol and text */
   text-align: center;
-
-  }
+}
   .page-title-symbol .symbol-triangle {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
